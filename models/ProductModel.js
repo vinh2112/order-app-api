@@ -21,10 +21,17 @@ const schema = new mongoose.Schema(
     unit: {
       type: String,
     },
-    price: {
-      type: Number,
-      default: 0,
-    },
+    prices: [
+      {
+        title: {
+          type: String,
+        },
+        price: {
+          type: Number,
+          default: 0,
+        },
+      },
+    ],
     quantity: {
       type: Number,
       default: 0,

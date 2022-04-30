@@ -18,9 +18,9 @@ const schema = new mongoose.Schema(
             ref: "Product",
           },
         ],
-        amount: {
+        price: {
           type: Number,
-          default: 1,
+          default: 0,
         },
       },
     ],

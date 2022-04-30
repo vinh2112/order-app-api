@@ -12,15 +12,16 @@ export const getAllProducts = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   try {
-    const { title, categoryId, image, description, price, quantity } = req.body;
+    const { title, categoryId, image, description, prices, quantity, unit } = req.body;
 
     const newProduct = new ProductModel({
       title,
       category: categoryId,
       image,
       description,
-      price,
+      prices,
       quantity,
+      unit,
     });
 
     const savedProduct = await newProduct.save();
