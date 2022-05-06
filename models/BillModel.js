@@ -2,25 +2,39 @@ import mongoose from "mongoose";
 
 const schema = new mongoose.Schema(
   {
-    table: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Table",
-    },
+    // table: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Table",
+    // },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
     dishes: [
       {
-        dish: [
+        dish: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Product",
+        },
+        subDish: [
           {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Product",
           },
         ],
-        price: {
+        size: {
+          type: String,
+        },
+        totalPrice: {
           type: Number,
           default: 0,
+        },
+        quantity: {
+          type: Number,
+          default: 1,
+        },
+        note: {
+          type: String,
         },
       },
     ],

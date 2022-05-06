@@ -52,13 +52,13 @@ const schema = new mongoose.Schema(
   { timestamps: true }
 );
 
-var autoPopulate = function (next) {
-  this.populate({
-    path: "category",
-  });
-  next();
-};
+// var autoPopulate = function (next) {
+//   this.populate({
+//     path: "category",
+//   });
+//   next();
+// };
 
-schema.pre("save", autoPopulate);
+// schema.pre("save", autoPopulate);
 
 export const ProductModel = mongoose.model("Product", schema);

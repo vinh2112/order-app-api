@@ -10,9 +10,31 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
+export const getProductsByCategoryId = async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+
+    const foods = await ProductModel.find({ category: categoryId });
+
+    return res.status(200).json(foods);
+  } catch (error) {
+    return res.status(500).json({ msg: error });
+  }
+};
+
 export const createProduct = async (req, res) => {
   try {
-    const { title, categoryId, image, description, prices, quantity, unit } = req.body;
+    const {
+      title,
+      categoryId,
+      image,
+      description,
+      prices,
+      quantity,
+      unit,
+      isLinked,
+      linkedCategory,
+    } = req.body;
 
     const newProduct = new ProductModel({
       title,
@@ -22,6 +44,8 @@ export const createProduct = async (req, res) => {
       prices,
       quantity,
       unit,
+      isLinked,
+      linkedCategory,
     });
 
     const savedProduct = await newProduct.save();
@@ -47,22 +71,35 @@ export const deleteProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, categoryId, image, description, price, quantity } = req.body;
+    const {
+      title,
+      categoryId,
+      image,
+      description,
+      prices,
+      quantity,
+      unit,
+      isLinked,
+      linkedCategory,
+    } = req.body;
 
-    await ProductModel.findByIdAndUpdate(
+    const updatedProduct = await ProductModel.findByIdAndUpdate(
       id,
       {
         title,
         category: categoryId,
         image,
         description,
-        price,
+        prices,
         quantity,
+        unit,
+        isLinked,
+        linkedCategory,
       },
       { new: true }
     );
 
-    return res.status(200).json({ isSuccess: true });
+    return res.status(200).json(updatedProduct);
   } catch (error) {
     return res.status(500).json({ msg: error });
   }
