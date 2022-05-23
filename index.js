@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
-import users from "./routers/users.js";
+import auth from "./routers/auth.js";
 import categories from "./routers/categories.js";
 import products from "./routers/products.js";
 import tables from "./routers/tables.js";
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true, limit: "30mb" }));
 app.use(cors());
 
-app.use("/user", users);
+app.use("/auth", auth);
 app.use("/api", categories);
 app.use("/api", products);
 app.use("/api", tables);
